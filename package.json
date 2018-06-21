@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev": "DEBUG=dracor-metrics:* nodemon -w ./app.js -w ./routes -w ./bin/www ./bin/www",
     "start": "node ./bin/www",
     "test": "xo"
   },
@@ -24,7 +25,9 @@
       "new-cap": [
         "error",
         {
-          "capIsNewExceptions": ["Router"]
+          "capIsNewExceptions": [
+            "Router"
+          ]
         }
       ],
       "space-before-function-paren": [
@@ -34,6 +37,7 @@
     }
   },
   "devDependencies": {
+    "nodemon": "^1.17.5",
     "xo": "^0.21.1"
   }
 }
