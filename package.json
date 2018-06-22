@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "DEBUG=dracor-metrics:* nodemon -w ./app.js -w ./routes -w ./bin/www ./bin/www",
-    "start": "node ./bin/www",
+    "dev": "DEBUG=dracor-metrics:* nodemon -w ./app.js -w ./routes -w ./bin/dracor-metrics-server ./bin/dracor-metrics-server",
+    "start": "node ./bin/dracor-metrics-server",
     "test": "xo"
   },
   "dependencies": {
