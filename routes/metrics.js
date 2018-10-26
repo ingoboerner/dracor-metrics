@@ -22,6 +22,7 @@ function calcMetrics (graph) {
   G.addEdgesFrom(graph.edges.map(e => [e.source, e.target]));
   const paths = jsnx.shortestPathLength(G);
   const density = jsnx.density(G);
+  const size = graph.nodes.length;
 
   let diameter = 0;
   let sum = 0;
@@ -57,11 +58,12 @@ function calcMetrics (graph) {
   }
 
   return {
+    size,
     density,
     diameter,
     maxDegree,
     maxDegreeIds,
-    averageDegree: sumDegrees / graph.nodes.length,
+    averageDegree: sumDegrees / size,
     averagePathLength: sum / numPairs,
     averageClustering: jsnx.averageClustering(G)
   };
