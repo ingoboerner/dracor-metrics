@@ -40,6 +40,11 @@ function calcMetrics (graph) {
     }
   }
 
+  const nodes = {};
+  G.nodes().forEach(id => {
+    nodes[id] = {};
+  });
+
   let sumDegrees = 0;
   let maxDegree = 0;
   let maxDegreeIds = [];
@@ -47,6 +52,7 @@ function calcMetrics (graph) {
   for (const d of degrees) {
     const id = d[0];
     const degree = d[1];
+    nodes[id].degree = degree;
     sumDegrees += degree;
     if (degree === maxDegree) {
       maxDegreeIds.push(id);
@@ -57,6 +63,29 @@ function calcMetrics (graph) {
     }
   }
 
+  // closeness centrality
+  for (const n of jsnx.allPairsShortestPath(G)) {
+    const id = n[0];
+    const paths = [];
+    for (const p of n[1]) {
+      paths.push(p[1]);
+    }
+    const summedLengths = paths.reduce((sum, p) => sum + p.length - 1, 0);
+    nodes[id].closeness = 1 / summedLengths;
+  }
+
+  // betweenness centrality
+  for (const n of jsnx.betweennessCentrality(G, {normalized: true})) {
+    const id = n[0];
+    nodes[id].betweenness = n[1];
+  }
+
+  // eigenvector centrality
+  for (const n of jsnx.eigenvectorCentrality(G)) {
+    const id = n[0];
+    nodes[id].eigenvector = n[1];
+  }
+
   return {
     size,
     density,
@@ -65,7 +94,8 @@ function calcMetrics (graph) {
     maxDegreeIds,
     averageDegree: sumDegrees / size,
     averagePathLength: sum / numPairs,
-    averageClustering: jsnx.averageClustering(G)
+    averageClustering: jsnx.averageClustering(G),
+    nodes
   };
 }
 
