@@ -81,9 +81,16 @@ function calcMetrics (graph) {
   }
 
   // eigenvector centrality
-  for (const n of jsnx.eigenvectorCentrality(G)) {
-    const id = n[0];
-    nodes[id].eigenvector = n[1];
+  // FIXME: jsnx.eigenvectorCentrality throws an exception with
+  // https://dracor.org/api/corpora/rus/play/lermontov-strannyj-chelovek
+  // we catch this here so we can still yield the rest of the metrics.
+  try {
+    for (const n of jsnx.eigenvectorCentrality(G)) {
+      const id = n[0];
+      nodes[id].eigenvector = n[1];
+    }
+  } catch (e) {
+    console.log(e);
   }
 
   return {
