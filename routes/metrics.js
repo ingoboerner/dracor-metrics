@@ -71,7 +71,7 @@ function calcMetrics (graph) {
       paths.push(p[1]);
     }
     const summedLengths = paths.reduce((sum, p) => sum + p.length - 1, 0);
-    nodes[id].closeness = 1 / summedLengths;
+    nodes[id].closeness = summedLengths ? 1 / summedLengths : 0;
   }
 
   // betweenness centrality
