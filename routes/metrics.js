@@ -64,14 +64,18 @@ function calcMetrics (graph) {
   }
 
   // closeness centrality
+  // calculated as "number of nodes divided by the sum of the topological
+  // distances (number of links in the shortest path)" (see
+  // https://github.com/dracor-org/dracor-api/issues/31#issuecomment-460372245)
   for (const n of jsnx.allPairsShortestPath(G)) {
     const id = n[0];
     const paths = [];
     for (const p of n[1]) {
       paths.push(p[1]);
     }
+    const numOfNodes = paths.length - 1;
     const summedLengths = paths.reduce((sum, p) => sum + p.length - 1, 0);
-    nodes[id].closeness = summedLengths ? 1 / summedLengths : 0;
+    nodes[id].closeness = summedLengths ? numOfNodes / summedLengths : 0;
   }
 
   // betweenness centrality
