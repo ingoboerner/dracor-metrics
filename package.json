@@ -1,6 +1,6 @@
 {
   "name": "dracor-metrics",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "dev": "DEBUG=dracor-metrics:* nodemon -w ./app.js -w ./routes -w ./bin/dracor-metrics-server ./bin/dracor-metrics-server",
