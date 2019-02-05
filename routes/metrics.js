@@ -41,8 +41,14 @@ function calcMetrics (graph) {
   }
 
   const nodes = {};
+
   G.nodes().forEach(id => {
-    nodes[id] = {};
+    // calculate weighted degree as sum of the weights of all edges belonging to
+    // a node
+    const weightedDegree = graph.edges
+      .filter(e => e.source === id || e.target === id)
+      .reduce((sum, e) => sum + e.weight, 0);
+    nodes[id] = {weightedDegree};
   });
 
   let sumDegrees = 0;
@@ -122,7 +128,7 @@ function makeGraph (cast, segments) {
       id: cooc[0] + '|' + cooc[1],
       source: cooc[0],
       target: cooc[1],
-      size: cooc[2]
+      weight: cooc[2]
     });
   });
   return {nodes, edges};
