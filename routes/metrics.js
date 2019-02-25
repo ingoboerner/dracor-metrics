@@ -1,5 +1,6 @@
 const express = require('express');
 const jsnx = require('jsnetworkx');
+const cc = require('connected-components');
 
 const router = express.Router();
 
@@ -103,6 +104,8 @@ function calcMetrics (graph) {
     console.log(e);
   }
 
+  const numConnectedComponents = cc(toAdjacencyList(G)).length;
+
   return {
     size,
     density,
@@ -112,6 +115,7 @@ function calcMetrics (graph) {
     averageDegree: sumDegrees / size,
     averagePathLength: sum / numPairs,
     averageClustering: jsnx.averageClustering(G),
+    numConnectedComponents,
     nodes
   };
 }
@@ -166,4 +170,17 @@ function getCooccurrences (segments) {
     });
 
   return cooccurrences;
+}
+
+function toAdjacencyList (G) {
+  const idxMap = {};
+  G.nodes().forEach((id, i) => {
+    idxMap[id] = i;
+  });
+  const adjDict = jsnx.toDictOfLists(G);
+  const adjList = [];
+  Object.keys(idxMap).forEach(id => {
+    adjList[idxMap[id]] = adjDict[id].map(n => idxMap[n]);
+  });
+  return adjList;
 }
