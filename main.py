@@ -23,6 +23,10 @@ def metrics(segments):
     max_degree = max([d for n, d in G.degree()])
     max_degree_ids = [n for n, d in G.degree() if d == max_degree]
 
+    path_lengths = [
+        y for x in nx.shortest_path_length(G) for y in x[1].values() if y > 0
+    ]
+
     nodes = {}
     cc = nx.closeness_centrality(G)
     bc = nx.betweenness_centrality(G)
@@ -46,9 +50,8 @@ def metrics(segments):
     return {
         'size': size,
         'density': nx.density(G),
-        'diameter': max(
-            [y for x in nx.shortest_path_length(G) for y in x[1].values()]
-        ),
+        'diameter': max(path_lengths),
+        'averagePathLength': sum(path_lengths) / len(path_lengths),
         'averageDegree': sum([d for n, d in G.degree()]) / size,
         'averageClustering': nx.average_clustering(G),
         'maxDegree': max_degree,

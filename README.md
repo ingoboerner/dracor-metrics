@@ -21,13 +21,15 @@ $ http POST :8000/metrics 'segments:=[{"speakers": ["a", "b", "c"]}, {"speakers"
 HTTP/1.0 200 OK
 Date: Sat, 15 Jun 2019 15:10:25 GMT
 Server: WSGIServer/0.2 CPython/3.7.3
-content-length: 574
+content-length: 630
 content-type: application/json; charset=utf-8
 
 {
     "averageClustering": 0.5833333333333333,
     "averageDegree": 2.0,
+    "averagePathLength": 1.3333333333333333,
     "density": 0.6666666666666666,
+    "diameter": 2,
     "maxDegree": 3,
     "maxDegreeIds": [
         "a"
