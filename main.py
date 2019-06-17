@@ -46,6 +46,9 @@ def metrics(segments):
     return {
         'size': size,
         'density': nx.density(G),
+        'diameter': max(
+            [y for x in nx.shortest_path_length(G) for y in x[1].values()]
+        ),
         'averageDegree': sum([d for n, d in G.degree()]) / size,
         'averageClustering': nx.average_clustering(G),
         'maxDegree': max_degree,
