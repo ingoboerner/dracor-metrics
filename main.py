@@ -9,6 +9,7 @@ def metrics(segments):
 
     G = nx.Graph()
 
+    weights = {}
     for seg in segments:
         speakers = seg.get('speakers', [])
         length = len(speakers)
@@ -17,7 +18,10 @@ def metrics(segments):
                 source = speakers[i]
                 others = speakers[i+1:length]
                 for target in others:
-                    G.add_edge(source, target)
+                    edge = tuple(sorted((source, target)))
+                    weights[edge] = weights.get(edge, 0) + 1
+
+    G.add_weighted_edges_from([(n[0], n[1], w) for n, w in weights.items()])
 
     size = len(list(G.nodes))
     max_degree = max([d for n, d in G.degree()])
@@ -28,6 +32,7 @@ def metrics(segments):
     ]
 
     nodes = {}
+    wd = G.degree(None, 'weight')
     cc = nx.closeness_centrality(G)
     bc = nx.betweenness_centrality(G)
     # FIXME: nx.eigenvector_centrality throws an exception with
@@ -41,6 +46,7 @@ def metrics(segments):
     for n, d in G.degree():
         nodes[n] = {
             'degree': d,
+            'weightedDegree': wd[n],
             'betweenness': bc[n],
             'closeness': cc[n]
         }
