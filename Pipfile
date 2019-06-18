@@ -9,6 +9,3 @@ verify_ssl = true
 hug = "*"
 networkx = "*"
 waitress = "*"
-
-[requires]
-python_version = "3.7"
