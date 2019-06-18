@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 hug = "*"
 networkx = "*"
+waitress = "*"
 
 [requires]
 python_version = "3.7"
