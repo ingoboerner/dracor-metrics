@@ -20,6 +20,10 @@ def metrics(segments):
     for seg in segments:
         speakers = seg.get('speakers', [])
         length = len(speakers)
+        # if segment has only one speaker we add her as a node to make sure she
+        # is included in the graph even if she has no connections
+        if length == 1:
+            G.add_node(speakers[0])
         for i in range(length):
             if i < length - 1:
                 source = speakers[i]
