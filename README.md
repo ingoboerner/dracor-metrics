@@ -8,16 +8,16 @@ Micro service calculating network metrics for dracor.org.
 git clone https://github.com/dracor-org/dracor-metrics.git --branch python
 cd dracor-metrics
 pipenv install
-pipenv run hug -f main.py
+pipenv run hug -f main.py -p 8030
 ```
 
-This runs a local development server at http://localhost:8000.
+This runs a local development server at http://localhost:8030.
 
 With [httpie](https://httpie.org) you can now post segment data to `/metrics`
 like this:
 
 ```
-$ http POST :8000/metrics 'segments:=[{"speakers": ["a", "b", "c"]}, {"speakers": ["a", "d"]}]'
+$ http POST :8030/metrics 'segments:=[{"speakers": ["a", "b", "c"]}, {"speakers": ["a", "d"]}]'
 HTTP/1.0 200 OK
 Date: Wed, 19 Jun 2019 14:59:16 GMT
 Server: WSGIServer/0.2 CPython/3.7.3
