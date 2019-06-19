@@ -3,6 +3,13 @@ import hug
 import networkx as nx
 
 
+@hug.get('/')
+def root():
+    return {
+        'service': 'dracor-metrics'
+    }
+
+
 @hug.post('/metrics')
 def metrics(segments):
     """Calculates network metrics for play"""
