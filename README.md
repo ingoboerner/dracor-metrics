@@ -19,9 +19,9 @@ like this:
 ```
 $ http POST :8000/metrics 'segments:=[{"speakers": ["a", "b", "c"]}, {"speakers": ["a", "d"]}]'
 HTTP/1.0 200 OK
-Date: Sat, 15 Jun 2019 15:10:25 GMT
+Date: Wed, 19 Jun 2019 14:59:16 GMT
 Server: WSGIServer/0.2 CPython/3.7.3
-content-length: 630
+content-length: 714
 content-type: application/json; charset=utf-8
 
 {
@@ -39,25 +39,29 @@ content-type: application/json; charset=utf-8
             "betweenness": 0.6666666666666666,
             "closeness": 1.0,
             "degree": 3,
-            "eigenvector": 0.6116286437343044
+            "eigenvector": 0.6116286437343044,
+            "weightedDegree": 3
         },
         "b": {
             "betweenness": 0.0,
             "closeness": 0.75,
             "degree": 2,
-            "eigenvector": 0.5227204550943347
+            "eigenvector": 0.5227204550943347,
+            "weightedDegree": 2
         },
         "c": {
             "betweenness": 0.0,
             "closeness": 0.75,
             "degree": 2,
-            "eigenvector": 0.5227204550943347
+            "eigenvector": 0.5227204550943347,
+            "weightedDegree": 2
         },
         "d": {
             "betweenness": 0.0,
             "closeness": 0.6,
             "degree": 1,
-            "eigenvector": 0.28184579793865727
+            "eigenvector": 0.28184579793865727,
+            "weightedDegree": 1
         }
     },
     "numConnectedComponents": 1,
