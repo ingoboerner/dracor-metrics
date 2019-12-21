@@ -6,7 +6,8 @@ import networkx as nx
 @hug.get('/')
 def root():
     return {
-        'service': 'dracor-metrics'
+        'service': 'dracor-metrics',
+        'version': '1.0.1'
     }
 
 
