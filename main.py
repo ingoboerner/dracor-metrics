@@ -7,7 +7,7 @@ import networkx as nx
 def root():
     return {
         'service': 'dracor-metrics',
-        'version': '1.0.2'
+        'version': '1.0.3'
     }
 
 
