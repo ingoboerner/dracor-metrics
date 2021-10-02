@@ -5,7 +5,7 @@ Micro service calculating network metrics for dracor.org.
 ## Getting started
 
 ```bash
-git clone https://github.com/dracor-org/dracor-metrics.git --branch python
+git clone https://github.com/dracor-org/dracor-metrics.git
 cd dracor-metrics
 pipenv install
 pipenv run hug -f main.py -p 8030
@@ -67,4 +67,13 @@ content-type: application/json; charset=utf-8
     "numConnectedComponents": 1,
     "size": 4
 }
+```
+
+## Docker
+
+The metrics service can also be run in a docker container:
+
+```bash
+docker build -t dracor/metrics
+docker run -p 8030:8030 --rm dracor/metrics
 ```

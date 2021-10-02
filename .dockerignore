@@ -1,0 +1,8 @@
+/.git/
+*.egg-info/
+*.pyc
+/.cache/
+/.eggs/
+/.tox/
+/dist/
+/venv/
