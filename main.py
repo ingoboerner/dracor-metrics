@@ -76,6 +76,7 @@ def metrics(segments):
         'maxDegree': max_degree,
         'maxDegreeIds': max_degree_ids,
         'numConnectedComponents': nx.number_connected_components(G),
+        'numEdges': G.number_of_edges(),
         'nodes': nodes
     }
 
